@@ -25,8 +25,12 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+    - assets/images/
+    - assets/icons/
+  fonts:
+    - family: acme
+      fonts:
+        - asset: assets/fonts/Acme-Regular.ttf
+    - family: ss-pro
+      fonts:
+        - asset: assets/fonts/SourceSansPro-Regular.ttf
