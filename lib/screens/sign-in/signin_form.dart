@@ -23,10 +23,11 @@ class SigninForm extends StatelessWidget {
               style: kheading1,
             ),
             SizedBox(
-              height: 8.h,
+              height: 9.h,
             ),
             TextFormField(
               decoration: ktfd1,
+              style: kbody1,
             ),
             SizedBox(
               height: 2.h,
@@ -34,6 +35,7 @@ class SigninForm extends StatelessWidget {
             TextFormField(
               decoration: ktfd2,
               obscureText: true,
+              style: kbody1,
             ),
             Padding(
               padding: EdgeInsets.only(top: 4.h),
@@ -84,6 +86,8 @@ class SigninForm extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {},
+                style: TextButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 0, vertical: 12)),
                 child: Text(
                   'Create a new account',
                   style: kbody1.copyWith(

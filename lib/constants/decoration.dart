@@ -23,6 +23,7 @@ InputDecoration ktfd1 = InputDecoration(
   ),
   hintText: 'Email',
   hintStyle: kbody1,
+  contentPadding: EdgeInsets.symmetric(vertical: 04, horizontal: 16),
   prefixIcon: Container(
     width: 24,
     child: Center(
@@ -37,6 +38,7 @@ InputDecoration ktfd1 = InputDecoration(
 
 //password field
 InputDecoration ktfd2 = InputDecoration(
+  contentPadding: EdgeInsets.symmetric(vertical: 04, horizontal: 16),
   border: OutlineInputBorder(
     borderSide: BorderSide(color: Colors.black),
   ),
