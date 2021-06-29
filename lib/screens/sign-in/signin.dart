@@ -1,3 +1,4 @@
+import 'package:brain_wars/constants/textstyles.dart';
 import 'package:brain_wars/screens/sign-in/signin_form.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -76,6 +77,16 @@ class _SigninScreenState extends State<SigninScreen>
                 curve: Curves.linear,
                 child: SigninForm(),
               ),
+              SizedBox(
+                height: 8.h,
+              ),
+              Text(
+                '© Brain Wars 2021',
+                style: kbody1.copyWith(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12.sp),
+              )
             ],
           ),
         ),

@@ -68,3 +68,36 @@ InputDecoration ktfd2 = InputDecoration(
     )),
   ),
 );
+
+//name field
+InputDecoration ktfd3 = InputDecoration(
+  contentPadding: EdgeInsets.symmetric(vertical: 04, horizontal: 16),
+  border: OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.black),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.black),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.black, width: 2),
+  ),
+  errorBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.red),
+  ),
+  focusedErrorBorder: OutlineInputBorder(
+    borderSide: BorderSide(
+      color: Colors.red,
+      width: 2,
+    ),
+  ),
+  hintText: 'Name',
+  hintStyle: kbody1,
+  prefixIcon: Container(
+    width: 24,
+    child: Center(
+        child: Icon(
+      Icons.account_circle_outlined,
+      color: Colors.black,
+    )),
+  ),
+);
