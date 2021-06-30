@@ -13,7 +13,7 @@ class FirestoreService {
   }
 
   //create user data
-  Future createUserData(
+  Future<void> createUserData(
       {@required String? id, @required String? username}) async {
     await _store.collection('usernames').doc('USERNAMES').update({
       'usernames': FieldValue.arrayUnion([username]),
