@@ -1,4 +1,4 @@
-package com.example.brain_wars
+package com.app.brain_wars
 
 import io.flutter.embedding.android.FlutterActivity
 
