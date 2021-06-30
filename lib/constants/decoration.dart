@@ -90,7 +90,7 @@ InputDecoration ktfd3 = InputDecoration(
       width: 2,
     ),
   ),
-  hintText: 'Name',
+  hintText: 'Username',
   hintStyle: kbody1,
   prefixIcon: Container(
     width: 24,
