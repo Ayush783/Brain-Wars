@@ -1,6 +1,7 @@
 import 'package:brain_wars/constants/decoration.dart';
 import 'package:brain_wars/constants/textstyles.dart';
 import 'package:brain_wars/screens/sign-in/signup_form.dart';
+import 'package:brain_wars/services/firestore_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
@@ -16,6 +17,7 @@ class SigninForm extends StatefulWidget {
 
 class _SigninFormState extends State<SigninForm> {
   final PageController pageController = PageController(initialPage: 0);
+  FirestoreService service = FirestoreService();
   @override
   Widget build(BuildContext context) {
     return Column(
