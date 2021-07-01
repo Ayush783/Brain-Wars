@@ -1,10 +1,5 @@
 class Usermodel {
-  final String? username, id, error;
+  final String? username, id;
 
-  Usermodel({this.username, this.id, this.error = 'SUCCESS'});
-
-  Usermodel.failure(String error)
-      : username = 'FAILED',
-        id = 'FAILED',
-        error = error;
+  Usermodel({this.username, this.id});
 }

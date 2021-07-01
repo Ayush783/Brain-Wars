@@ -1,17 +1,18 @@
+//@dart=2.9
 part of 'firebase_bloc.dart';
 
 @immutable
 abstract class FirebaseEvent {}
 
 class SignUp extends FirebaseEvent {
-  final String? email, password, username;
+  final String email, password, username;
 
   SignUp(
       {@required this.email, @required this.password, @required this.username});
 }
 
 class SignIn extends FirebaseEvent {
-  final String? email, password;
+  final String email, password;
 
   SignIn({@required this.email, @required this.password});
 }
