@@ -20,4 +20,10 @@ class FirestoreService {
     });
     await _store.collection('users').doc(id).set({'username': username});
   }
+
+  //get user data
+  Future<Map<String, dynamic>> getUserData({@required String? id}) async {
+    final res = await _store.collection('users').doc(id).get();
+    return res.data()!;
+  }
 }
