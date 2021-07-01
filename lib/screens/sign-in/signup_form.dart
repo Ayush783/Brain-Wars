@@ -1,6 +1,8 @@
 import 'package:brain_wars/constants/decoration.dart';
 import 'package:brain_wars/constants/textstyles.dart';
+import 'package:brain_wars/providers/toggle_form_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sizer/sizer.dart';
 
 class SignupForm extends StatefulWidget {
@@ -68,12 +70,10 @@ class _SignupFormState extends State<SignupForm> {
               height: 1.h,
             ),
             Align(
-              alignment: Alignment.centerLeft,
+              alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {
-                  widget.pageController!.animateToPage(0,
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.bounceInOut);
+                  context.read(toggleForm).toggle();
                 },
                 style: TextButton.styleFrom(
                     padding: EdgeInsets.symmetric(horizontal: 0, vertical: 12)),
