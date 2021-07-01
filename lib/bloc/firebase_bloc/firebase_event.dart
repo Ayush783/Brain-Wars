@@ -20,3 +20,17 @@ class SignIn extends FirebaseEvent {
 class AuthStates extends FirebaseEvent {}
 
 class EmailVerification extends FirebaseEvent {}
+
+class SignedIn extends FirebaseEvent {}
+
+class GetOrCreateUserData extends FirebaseEvent {
+  final String id, getOrCreate, username;
+
+  GetOrCreateUserData(this.id, this.getOrCreate, this.username);
+}
+
+class FirebaseError extends FirebaseEvent {
+  final UserModelFailure failure;
+
+  FirebaseError(this.failure);
+}
