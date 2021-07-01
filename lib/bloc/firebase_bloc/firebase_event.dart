@@ -6,15 +6,20 @@ abstract class FirebaseEvent {}
 
 class SignUp extends FirebaseEvent {
   final String email, password, username;
+  final BuildContext context;
 
   SignUp(
-      {@required this.email, @required this.password, @required this.username});
+      {@required this.email,
+      @required this.password,
+      @required this.username,
+      this.context});
 }
 
 class SignIn extends FirebaseEvent {
   final String email, password;
+  final BuildContext context;
 
-  SignIn({@required this.email, @required this.password});
+  SignIn({@required this.email, @required this.password, this.context});
 }
 
 class AuthStates extends FirebaseEvent {}
@@ -25,8 +30,9 @@ class SignedIn extends FirebaseEvent {}
 
 class GetOrCreateUserData extends FirebaseEvent {
   final String id, getOrCreate, username;
+  final BuildContext context;
 
-  GetOrCreateUserData(this.id, this.getOrCreate, this.username);
+  GetOrCreateUserData(this.id, this.getOrCreate, this.username, this.context);
 }
 
 class FirebaseError extends FirebaseEvent {

@@ -1,10 +1,14 @@
 //@dart=2.9
 import 'dart:async';
+import 'dart:js';
 
 import 'package:bloc/bloc.dart';
 import 'package:brain_wars/models/user_model_failure.dart';
+import 'package:brain_wars/providers/user_provider.dart';
 import 'package:brain_wars/services/firebase_auth_service.dart';
 import 'package:brain_wars/services/firestore_service.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meta/meta.dart';
 
 part 'firebase_event.dart';
@@ -27,7 +31,7 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
           email: event.email, password: event.password);
 
       failureOrid.fold((l) => add(FirebaseError(l)),
-          (r) => add(GetOrCreateUserData(r, 'GET', '')));
+          (r) => add(GetOrCreateUserData(r, 'GET', '', event.context)));
     }
 
     //sign up event
@@ -41,8 +45,10 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
             password: event.password,
             username: event.username);
 
-        failureOrid.fold((l) => add(FirebaseError(l)),
-            (r) => add(GetOrCreateUserData(r, 'CREATE', event.username)));
+        failureOrid.fold(
+            (l) => add(FirebaseError(l)),
+            (r) => add(GetOrCreateUserData(
+                r, 'CREATE', event.username, event.context)));
       } else {
         yield FirebaseFailure('USERNAME_NOT_AVAILABLE');
       }
@@ -66,6 +72,8 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
         add(EmailVerification());
       }
       final res = await _firestoreService.getUserData(id: event.id);
+      res['id'] = event.id;
+      event.context.read(userProvider).getData(res);
       add(SignedIn());
     }
 
