@@ -79,7 +79,7 @@ class _SigninScreenState extends State<SigninScreen>
                 child: SigninForm(),
               ),
               SizedBox(
-                height: 8.h,
+                height: 2.h,
               ),
               Text(
                 '© Brain Wars 2021',

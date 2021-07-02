@@ -39,13 +39,17 @@ class _SigninFormState extends State<SigninForm> {
           return SignInLoader(
             value: 'Signing you in...',
           );
+        else if (state is FirebaseSigningUp)
+          return SignInLoader(
+            value: 'Signing you up...',
+          );
         else if (state is FetchingData)
           return SignInLoader(
             value: 'Fetching data...',
           );
         else if (state is FirebaseVerifyingEmail)
           return Container(
-            height: 54.h,
+            height: 65.h,
             child: Padding(
               padding: EdgeInsets.all(24),
               child: Column(
@@ -73,7 +77,7 @@ class _SigninFormState extends State<SigninForm> {
           );
         else
           return Container(
-            height: 54.h,
+            height: 65.h,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -82,13 +86,13 @@ class _SigninFormState extends State<SigninForm> {
                   style: kheading1,
                 ),
                 SizedBox(
-                  height: 8.h,
+                  height: 4.h,
                 ),
                 Consumer(
                   builder: (context, watch, child) {
                     final toggleform = watch(toggleForm);
                     return Container(
-                      height: 40.h,
+                      height: 55.h,
                       child: AnimatedSwitcher(
                         child:
                             toggleform.show ? SignupForm() : Signinformbody(),
@@ -114,7 +118,7 @@ class SignInLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 54.h,
+      height: 65.h,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

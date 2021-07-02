@@ -10,8 +10,6 @@ class FirebaseSigningUp extends FirebaseState {}
 
 class FirebaseSigningIn extends FirebaseState {}
 
-class FirebaseSignedUp extends FirebaseState {}
-
 class FirebaseSignedIn extends FirebaseState {}
 
 class FirebaseFailure extends FirebaseState {

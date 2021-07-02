@@ -25,6 +25,7 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
   ) async* {
     //sign in event
     if (event is SignIn) {
+      print(1);
       yield FirebaseSigningIn();
       final failureOrid = await _authService.signIn(
           email: event.email, password: event.password);
@@ -35,6 +36,7 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
 
     //sign up event
     if (event is SignUp) {
+      print(2);
       yield FirebaseSigningUp();
       final isUsernameAvailable =
           await _firestoreService.checkUsername(event.username);
@@ -58,6 +60,7 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
 
     //email verify event
     if (event is EmailVerification) {
+      print(3);
       yield FirebaseVerifyingEmail();
       final isEmailVerified = await _authService.verifyEmail();
       if (isEmailVerified) add(SignedIn());
@@ -65,6 +68,7 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
 
     //get or create user data
     if (event is GetOrCreateUserData) {
+      print(4);
       yield FetchingData();
       if (event.getOrCreate == "CREATE") {
         await _firestoreService.createUserData(
@@ -84,6 +88,7 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
 
     //handle error
     if (event is FirebaseError) {
+      print(5);
       yield FirebaseFailure(event.failure.error);
     }
   }
