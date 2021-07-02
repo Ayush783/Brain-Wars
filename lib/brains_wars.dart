@@ -1,10 +1,10 @@
+//@dart=2.9
+import 'package:brain_wars/screens/sign-in/blocprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import 'screens/sign-in/signin.dart';
-
 class BrainWars extends StatelessWidget {
-  const BrainWars({Key? key}) : super(key: key);
+  const BrainWars({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class BrainWars extends StatelessWidget {
       builder: (context, orientation, deviceType) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Brain Wars',
-        home: SigninScreen(),
+        home: SignInBlocProvider(),
       ),
     );
   }

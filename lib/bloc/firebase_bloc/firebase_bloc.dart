@@ -1,6 +1,5 @@
 //@dart=2.9
 import 'dart:async';
-import 'dart:js';
 
 import 'package:bloc/bloc.dart';
 import 'package:brain_wars/models/user_model_failure.dart';
@@ -60,7 +59,8 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
     //email verify event
     if (event is EmailVerification) {
       yield FirebaseVerifyingEmail();
-      await _authService.verifyEmail();
+      final isEmailVerified = await _authService.verifyEmail();
+      if (isEmailVerified) add(SignedIn());
     }
 
     //get or create user data

@@ -1,19 +1,17 @@
 import 'package:brain_wars/constants/decoration.dart';
 import 'package:brain_wars/constants/textstyles.dart';
-import 'package:brain_wars/providers/toggle_form_provider.dart';
+import 'package:brain_wars/utilities.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
-class SignupForm extends StatefulWidget {
-  final PageController? pageController;
-  const SignupForm({Key? key, this.pageController}) : super(key: key);
+class Signinformbody extends StatelessWidget {
+  const Signinformbody({
+    Key? key,
+  }) : super(key: key);
 
-  @override
-  _SignupFormState createState() => _SignupFormState();
-}
+  static final Utility util = Utility();
 
-class _SignupFormState extends State<SignupForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -31,13 +29,6 @@ class _SignupFormState extends State<SignupForm> {
               height: 2.h,
             ),
             TextFormField(
-              decoration: ktfd3,
-              style: kbody1,
-            ),
-            SizedBox(
-              height: 2.h,
-            ),
-            TextFormField(
               decoration: ktfd2,
               obscureText: true,
               style: kbody1,
@@ -48,15 +39,34 @@ class _SignupFormState extends State<SignupForm> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
+                    flex: 3,
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Text(
-                        'Sign Up',
+                        'Sign In',
                         style: kbody1,
                       ),
                       style: ElevatedButton.styleFrom(
                         primary: Color(0xff1a191c),
                         elevation: 4,
+                        padding: EdgeInsets.symmetric(
+                          vertical: 8,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 4.w,
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: OutlinedButton.icon(
+                      onPressed: () {},
+                      icon: SvgPicture.asset('assets/icons/google.svg'),
+                      label: Text(''),
+                      style: OutlinedButton.styleFrom(
+                        primary: Colors.black,
+                        side: BorderSide(color: Color(0xff1a191c), width: 2),
                         padding: EdgeInsets.symmetric(
                           vertical: 8,
                         ),
@@ -73,12 +83,12 @@ class _SignupFormState extends State<SignupForm> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {
-                  context.read(toggleForm).toggle();
+                  util.toggleSigninform(context);
                 },
                 style: TextButton.styleFrom(
                     padding: EdgeInsets.symmetric(horizontal: 0, vertical: 12)),
                 child: Text(
-                  'Have an account? Login',
+                  'Create a new account',
                   style: kbody1.copyWith(
                     fontSize: 14.sp,
                     decoration: TextDecoration.underline,

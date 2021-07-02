@@ -1,10 +1,11 @@
+//@dart=2.9
 import 'package:brain_wars/constants/textstyles.dart';
 import 'package:brain_wars/screens/sign-in/signin_form.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class SigninScreen extends StatefulWidget {
-  const SigninScreen({Key? key}) : super(key: key);
+  const SigninScreen({Key key}) : super(key: key);
 
   @override
   _SigninScreenState createState() => _SigninScreenState();
@@ -12,9 +13,9 @@ class SigninScreen extends StatefulWidget {
 
 class _SigninScreenState extends State<SigninScreen>
     with SingleTickerProviderStateMixin {
-  AnimationController? _controller;
-  Animation<double>? scale;
-  Animation<double>? paddingTop;
+  AnimationController _controller;
+  Animation<double> scale;
+  Animation<double> paddingTop;
 
   @override
   void initState() {
@@ -27,20 +28,20 @@ class _SigninScreenState extends State<SigninScreen>
       end: 40,
     ).animate(
       CurvedAnimation(
-        parent: _controller!,
+        parent: _controller,
         curve: Interval(0.0, 0.30, curve: Curves.easeInExpo),
       ),
     );
     paddingTop = Tween<double>(begin: 30.h, end: 4.h).animate(
       CurvedAnimation(
-        parent: _controller!,
+        parent: _controller,
         curve: Interval(0.650, 1.00, curve: Curves.linear),
       ),
     );
-    _controller!.addListener(() {
-      if (_controller!.isCompleted) setState(() {});
+    _controller.addListener(() {
+      if (_controller.isCompleted) setState(() {});
     });
-    _controller!.forward();
+    _controller.forward();
     super.initState();
   }
 
@@ -63,16 +64,16 @@ class _SigninScreenState extends State<SigninScreen>
             children: [
               AnimatedBuilder(
                 builder: (context, child) => Padding(
-                  padding: EdgeInsets.only(top: paddingTop!.value),
+                  padding: EdgeInsets.only(top: paddingTop.value),
                   child: Image.asset(
                     'assets/images/logo.png',
-                    width: scale!.value.w,
+                    width: scale.value.w,
                   ),
                 ),
-                animation: _controller!,
+                animation: _controller,
               ),
               AnimatedOpacity(
-                opacity: _controller!.isCompleted ? 1 : 0,
+                opacity: _controller.isCompleted ? 1 : 0,
                 duration: Duration(milliseconds: 300),
                 curve: Curves.linear,
                 child: SigninForm(),

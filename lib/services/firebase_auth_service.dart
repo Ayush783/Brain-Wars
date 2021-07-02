@@ -39,8 +39,12 @@ class FirebaseAuthService {
   }
 
   //vsend link to verify email
-  verifyEmail() async {
+  Future<bool> verifyEmail() async {
     final user = _auth.currentUser;
     if (user != null && !user.emailVerified) await user.sendEmailVerification();
+    if (user.emailVerified)
+      return true;
+    else
+      return false;
   }
 }
