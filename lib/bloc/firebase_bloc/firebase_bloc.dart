@@ -3,11 +3,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:brain_wars/models/user_model_failure.dart';
-import 'package:brain_wars/providers/user_provider.dart';
 import 'package:brain_wars/services/firebase_auth_service.dart';
 import 'package:brain_wars/services/firestore_service.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meta/meta.dart';
 
 part 'firebase_event.dart';
@@ -36,11 +34,10 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
 
     //sign up event
     if (event is SignUp) {
-      print(2);
       yield FirebaseSigningUp();
       final isUsernameAvailable =
           await _firestoreService.checkUsername(event.username);
-      if (isUsernameAvailable) {
+      if (!isUsernameAvailable) {
         final failureOrid = await _authService.signUp(
             email: event.email,
             password: event.password,
@@ -60,15 +57,18 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
 
     //email verify event
     if (event is EmailVerification) {
-      print(3);
       yield FirebaseVerifyingEmail();
-      final isEmailVerified = await _authService.verifyEmail();
-      if (isEmailVerified) add(SignedIn());
+      await _authService.verifyEmail();
+      _authService.authStateChanges().listen((user) {
+        if (user.emailVerified)
+          add(SignedIn());
+        else
+          print('Noonononono');
+      });
     }
 
     //get or create user data
     if (event is GetOrCreateUserData) {
-      print(4);
       yield FetchingData();
       if (event.getOrCreate == "CREATE") {
         await _firestoreService.createUserData(
@@ -77,7 +77,8 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
       }
       final res = await _firestoreService.getUserData(id: event.id);
       res['id'] = event.id;
-      event.context.read(userProvider).getData(res);
+      print(res);
+      // event.context.read(userProvider).getData(Map<String, dynamic>.from(res));
       add(SignedIn());
     }
 
@@ -88,7 +89,6 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
 
     //handle error
     if (event is FirebaseError) {
-      print(5);
       yield FirebaseFailure(event.failure.error);
     }
   }

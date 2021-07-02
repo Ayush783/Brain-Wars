@@ -1,4 +1,6 @@
 //@dart=2.9
+import 'dart:async';
+
 import 'package:brain_wars/models/user_model_failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -39,12 +41,10 @@ class FirebaseAuthService {
   }
 
   //vsend link to verify email
-  Future<bool> verifyEmail() async {
+  Future<void> verifyEmail() async {
     final user = _auth.currentUser;
+    print(user.emailVerified);
     if (user != null && !user.emailVerified) await user.sendEmailVerification();
-    if (user.emailVerified)
-      return true;
-    else
-      return false;
+    print(user.emailVerified);
   }
 }

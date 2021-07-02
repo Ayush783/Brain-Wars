@@ -49,7 +49,7 @@ class _SignupFormState extends State<SignupForm> {
               controller: usernameController,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) =>
-                  value != null ? 'please enter a username' : null,
+                  value == '' ? 'please enter a username' : null,
             ),
             SizedBox(
               height: 2.h,
@@ -58,6 +58,7 @@ class _SignupFormState extends State<SignupForm> {
               controller: passwordController,
               decoration: ktfd2,
               obscureText: true,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               style: kbody1,
               validator: (value) => strongPass.hasMatch(value)
                   ? null
