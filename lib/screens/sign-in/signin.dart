@@ -25,7 +25,7 @@ class _SigninScreenState extends State<SigninScreen>
     );
     scale = Tween<double>(
       begin: 100,
-      end: 40,
+      end: 30,
     ).animate(
       CurvedAnimation(
         parent: _controller,
@@ -78,16 +78,6 @@ class _SigninScreenState extends State<SigninScreen>
                 curve: Curves.linear,
                 child: SigninForm(),
               ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Text(
-                '© Brain Wars 2021',
-                style: kbody1.copyWith(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12.sp),
-              )
             ],
           ),
         ),

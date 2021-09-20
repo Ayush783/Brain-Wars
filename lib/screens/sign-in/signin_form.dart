@@ -49,60 +49,64 @@ class _SigninFormState extends State<SigninForm> {
           );
         else if (state is FirebaseVerifyingEmail)
           return Container(
-            height: 65.h,
+            height: 72.h,
             child: Padding(
               padding: EdgeInsets.all(24),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'A verification link must have arrived in your inbox, Kindly click on it to verify your email.',
-                    style: kbody1,
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text('Re-create your account'),
-                    style: ElevatedButton.styleFrom(
-                        primary: Color(0xff1a191c),
-                        padding:
-                            EdgeInsets.symmetric(vertical: 12, horizontal: 24)),
-                  ),
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'A verification link must have arrived in your inbox, Kindly click on it to verify your email.',
+                      style: kbody1,
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text('Re-create your account'),
+                      style: ElevatedButton.styleFrom(
+                          primary: Color(0xff1a191c),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 24)),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
         else
           return Container(
-            height: 65.h,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'BRAIN WARS',
-                  style: kheading1,
-                ),
-                SizedBox(
-                  height: 4.h,
-                ),
-                Consumer(
-                  builder: (context, watch, child) {
-                    final toggleform = watch(toggleForm);
-                    return Container(
-                      height: 55.h,
-                      child: AnimatedSwitcher(
-                        child:
-                            toggleform.show ? SignupForm() : Signinformbody(),
-                        duration: Duration(milliseconds: 450),
-                        reverseDuration: Duration(milliseconds: 100),
-                      ),
-                    );
-                  },
-                )
-              ],
+            height: 72.h,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'BRAIN WARS',
+                    style: kheading1,
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  Consumer(
+                    builder: (context, watch, child) {
+                      final toggleform = watch(toggleForm);
+                      return Container(
+                        height: 60.h,
+                        child: AnimatedSwitcher(
+                          child:
+                              toggleform.show ? SignupForm() : Signinformbody(),
+                          duration: Duration(milliseconds: 450),
+                          reverseDuration: Duration(milliseconds: 100),
+                        ),
+                      );
+                    },
+                  )
+                ],
+              ),
             ),
           );
       },
