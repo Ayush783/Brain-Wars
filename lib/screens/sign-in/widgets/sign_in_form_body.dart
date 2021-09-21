@@ -121,8 +121,28 @@ class Signinformbody extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     decorationColor: Color(0xff1a191c),
                     shadows: [
-                      Shadow(color: Colors.black, offset: Offset(0, -3))
+                      Shadow(color: Colors.black, offset: Offset(0, -3)),
                     ],
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {},
+                style: TextButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 0, vertical: 12)),
+                child: Text(
+                  'Forgot password',
+                  style: kbody1.copyWith(
+                    fontSize: 14.sp,
+                    decoration: TextDecoration.underline,
+                    decorationThickness: 2,
+                    color: Colors.transparent,
+                    fontWeight: FontWeight.bold,
+                    decorationColor: Colors.red,
+                    shadows: [Shadow(color: Colors.red, offset: Offset(0, -4))],
                   ),
                 ),
               ),
