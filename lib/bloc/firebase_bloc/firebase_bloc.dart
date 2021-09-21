@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:brain_wars/models/user_model_failure.dart';
 import 'package:brain_wars/services/firebase_auth_service.dart';
 import 'package:brain_wars/services/firestore_service.dart';
+import 'package:brain_wars/utilities.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
@@ -23,7 +24,6 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
   ) async* {
     //sign in event
     if (event is SignIn) {
-      print(1);
       yield FirebaseSigningIn();
       final failureOrid = await _authService.signIn(
           email: event.email, password: event.password);
@@ -59,12 +59,8 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
     if (event is EmailVerification) {
       yield FirebaseVerifyingEmail();
       await _authService.verifyEmail();
-      _authService.authStateChanges().listen((user) {
-        if (user.emailVerified)
-          add(SignedIn());
-        else
-          print('Noonononono');
-      });
+      await _authService.signout();
+      yield FirebaseVerificationEmailLinkSent();
     }
 
     //get or create user data
@@ -74,12 +70,11 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
         await _firestoreService.createUserData(
             id: event.id, username: event.username);
         add(EmailVerification());
+      } else {
+        final res = await _firestoreService.getUserData(id: event.id);
+        res['id'] = event.id;
+        add(SignedIn());
       }
-      final res = await _firestoreService.getUserData(id: event.id);
-      res['id'] = event.id;
-      print(res);
-      // event.context.read(userProvider).getData(Map<String, dynamic>.from(res));
-      add(SignedIn());
     }
 
     //signed in successfuly
@@ -90,6 +85,13 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
     //handle error
     if (event is FirebaseError) {
       yield FirebaseFailure(event.failure.error);
+    }
+
+    //sign in again after email verified
+    if (event is SignInAgain) {
+      print(1);
+      yield FirebaseInitial();
+      Utility().toggleSigninform(event.context);
     }
   }
 }

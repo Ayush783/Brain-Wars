@@ -7,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
 class FirebaseAuthService {
-  final _auth = FirebaseAuth.instance;
+  static final _auth = FirebaseAuth.instance;
 
   //sign up
   Future<Either<UserModelFailure, String>> signUp(
@@ -29,7 +29,11 @@ class FirebaseAuthService {
     try {
       final userCred = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      return right(userCred.user.uid);
+      final isVerified = this.checkEmailVerification(userCred.user);
+      if (isVerified)
+        return right(userCred.user.uid);
+      else
+        return left(UserModelFailure('Email not verified'));
     } catch (e) {
       return left(UserModelFailure(e.toString()));
     }
@@ -42,9 +46,16 @@ class FirebaseAuthService {
 
   //vsend link to verify email
   Future<void> verifyEmail() async {
-    final user = _auth.currentUser;
-    print(user.emailVerified);
-    if (user != null && !user.emailVerified) await user.sendEmailVerification();
-    print(user.emailVerified);
+    await _auth.currentUser.sendEmailVerification();
+  }
+
+  bool checkEmailVerification(User user) {
+    final isVerified = user.emailVerified;
+    return isVerified;
+  }
+
+  //sign out
+  Future<void> signout() async {
+    await _auth.signOut();
   }
 }

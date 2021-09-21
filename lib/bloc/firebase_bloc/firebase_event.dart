@@ -28,6 +28,12 @@ class EmailVerification extends FirebaseEvent {}
 
 class SignedIn extends FirebaseEvent {}
 
+class SignInAgain extends FirebaseEvent {
+  final BuildContext context;
+
+  SignInAgain(this.context);
+}
+
 class GetOrCreateUserData extends FirebaseEvent {
   final String id, getOrCreate, username;
   final BuildContext context;

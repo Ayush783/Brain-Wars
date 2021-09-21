@@ -8,7 +8,7 @@ import 'package:brain_wars/screens/sign-in/widgets/sign_in_form_body.dart';
 import 'package:brain_wars/services/firestore_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' show Consumer;
 import 'package:sizer/sizer.dart';
 
 class SigninForm extends StatefulWidget {
@@ -48,32 +48,39 @@ class _SigninFormState extends State<SigninForm> {
             value: 'Fetching data...',
           );
         else if (state is FirebaseVerifyingEmail)
+          return SignInLoader(
+            value: 'Verifying email...',
+          );
+        else if (state is FirebaseVerificationEmailLinkSent)
           return Container(
             height: 72.h,
             child: Padding(
               padding: EdgeInsets.all(24),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'A verification link must have arrived in your inbox, Kindly click on it to verify your email.',
-                      style: kbody1,
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(
-                      height: 4.h,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text('Re-create your account'),
-                      style: ElevatedButton.styleFrom(
-                          primary: Color(0xff1a191c),
-                          padding: EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 24)),
-                    ),
-                  ],
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'A verification link must have arrived in your inbox, Kindly click on it to verify your email and then sign in again',
+                    style: kbody1,
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 4.h,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.read<FirebaseBloc>().add(SignInAgain(context));
+                    },
+                    child: Text('Sign in'),
+                    style: ElevatedButton.styleFrom(
+                        primary: Color(0xff1a191c),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 12, horizontal: 24)),
+                  ),
+                  SizedBox(
+                    height: 16.h,
+                  ),
+                ],
               ),
             ),
           );

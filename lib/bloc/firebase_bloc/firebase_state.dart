@@ -20,4 +20,6 @@ class FirebaseFailure extends FirebaseState {
 
 class FirebaseVerifyingEmail extends FirebaseState {}
 
+class FirebaseVerificationEmailLinkSent extends FirebaseState {}
+
 class FetchingData extends FirebaseState {}
