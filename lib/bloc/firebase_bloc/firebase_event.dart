@@ -46,3 +46,5 @@ class FirebaseError extends FirebaseEvent {
 
   FirebaseError(this.failure);
 }
+
+class SignInWithGoogle extends FirebaseEvent {}

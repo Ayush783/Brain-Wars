@@ -85,7 +85,9 @@ class Signinformbody extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: OutlinedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.read<FirebaseBloc>().add(SignInWithGoogle());
+                      },
                       icon: SvgPicture.asset('assets/icons/google.svg'),
                       label: Text(''),
                       style: OutlinedButton.styleFrom(

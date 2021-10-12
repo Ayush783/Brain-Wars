@@ -19,6 +19,7 @@ dependencies:
   flutter_riverpod: ^0.14.0+3
   flutter_svg: ^0.22.0
   sizer: ^2.0.13
+  google_sign_in: ^5.1.0
 
 dev_dependencies:
   flutter_test:

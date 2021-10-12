@@ -93,5 +93,12 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
       yield FirebaseInitial();
       Utility().toggleSigninform(event.context);
     }
+
+    if (event is SignInWithGoogle) {
+      yield FirebaseSigningIn();
+      final failureOrid = await _authService.signInWithGoogle();
+
+      failureOrid.fold((l) => add(FirebaseError(l)), (r) => add(SignedIn()));
+    }
   }
 }

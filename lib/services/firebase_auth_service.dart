@@ -5,6 +5,7 @@ import 'package:brain_wars/models/user_model_failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthService {
   static final _auth = FirebaseAuth.instance;
@@ -57,5 +58,28 @@ class FirebaseAuthService {
   //sign out
   Future<void> signout() async {
     await _auth.signOut();
+  }
+
+  //google sign in
+  Future<Either<UserModelFailure, String>> signInWithGoogle() async {
+    try {
+      final googleUser = await GoogleSignIn().signIn();
+      print(googleUser.email);
+      print(googleUser.displayName);
+
+      final googleAuth = await googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      final userCred =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      return right(userCred.user.uid);
+    } catch (e) {
+      print(e.toString());
+      return left(UserModelFailure(e.toString()));
+    }
   }
 }
